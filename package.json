@@ -1,0 +1,23 @@
+{
+  "name": "xls20",
+  "version": "0.9.83",
+  "description": "JavaScript SDK for XLS-20 NFT interaction on the XRP Ledger",
+  "main": "xls20.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dylanireland/xls20.js.git"
+  },
+  "author": "Dylan Ireland",
+  "license": "Apache 2.0",
+  "keywords": [
+    "XLS20",
+    "XLS-20"
+  ],
+  "dependencies": {
+    "clean-jsdoc-theme": "^4.1.8",
+    "xrpl": "^2.3.1"
+  }
+}
