@@ -9,15 +9,14 @@ async function main(){
     const seed = "sEdV82hVrg1hYKrPcYtanw6oEypn6VW"
     const xls20 = new XLS20(network, seed)
     
-    await xls20.connect()
+    await xls20.connect() 
+    console.log(await xls20.fundWallet())
 
     const transferFee = 5000 // 5%
     const flags = 9 // Burnable and transferable
     const uri = "ipfs://MeTaDaTaUrIed84ca32c32342eca83d" // Metadata URI
-    const mintResponse = await xls20.mint(transferFee, flags, uri)
+    const mintResponse = await xls20.mint(transferFee,uri,flags)
     console.log(mintResponse)
-    
-    console.log(await xls20.fundWallet())
 }
 
 // async function minNFT(){
