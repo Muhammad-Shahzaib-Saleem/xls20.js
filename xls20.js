@@ -1,10 +1,15 @@
 const xrpl = require("xrpl");
 
+const network = "Devnet"
+const seed = "sEdV82hVrg1hYKrPcYtanw6oEypn6VW"
+const xls20 = new XLS20(network, seed)
+await xls20.connect()
+console.log(await xls20.fundWallet())
 /**
  * The XLS20 Class is used to interact with XLS20 NFTs on the XRPL. To use XLS20.js, use `import XLS20 from 'xls20`.
- * Built for [Xdragons](https://xdragons.io), usable anywhere.
+ *
  * 
- * @author Dylan Ireland <dylan.ireland777@gmail.com>
+ * 
  */
 class XLS20 {
   /**
@@ -44,6 +49,9 @@ class XLS20 {
    * // Use `xls20`...
    * ```
    */
+
+
+
   async connect() {
     try {
       await this.client.connect();
