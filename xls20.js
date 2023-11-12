@@ -1,4 +1,4 @@
-const xrpl = require("xrpl");
+import { Wallet, Client, convertStringToHex } from "xrpl";
 
 
 /**
@@ -18,18 +18,18 @@ class XLS20 {
    */
   constructor(network, walletSeed) {
     if (walletSeed) {
-      this.wallet = xrpl.Wallet.fromSeed(walletSeed);
+      this.wallet = Wallet.fromSeed(walletSeed);
     } else {
       this.generateWallet();
     }
     
     switch (network) {
-      case "Devnet": this.network = ["Devnet", "wss://s.devnet.rippletest.net:51233"]; break;
+      case "Devnet": this.network = ["Devnet", "wss://s.altnet.rippletest.net:51233"]; break;
       case "Mainnet": this.network = ["Mainnet", "wss://xrplcluster.com/"]; break;
       default: this.network = ["Custom", network]; break;
     }
 
-    this.client = new xrpl.Client(this.network[1]);
+    this.client = new Client(this.network[1]);
   }
 
   /**
@@ -61,7 +61,7 @@ class XLS20 {
    * Generates a new wallet and sets it to the instance's `wallet`.
    */
   generateWallet() {
-    this.wallet = xrpl.Wallet.generate();
+    this.wallet = Wallet.generate();
   }
 
   /**
@@ -193,7 +193,7 @@ class XLS20 {
       "TransferFee": transferFee, // In 10ths of a basis-point. i.e. 5000 == 5%
       "NFTokenTaxon": taxon,
       "Flags": flags, //Burnable and transferable is 9
-      "URI": xrpl.convertStringToHex(uri),
+      "URI": convertStringToHex(uri),
     }
   
     return this.client.submitAndWait(jsontx, { wallet: this.wallet })
@@ -484,8 +484,22 @@ class XLS20 {
 
     return this.client.submitAndWait(jsontx, { wallet: this.wallet })
   }
+
 }
 
-module.exports = XLS20;
+async function main (){
+const network = "Devnet"
+const seed = "sEdV82hVrg1hYKrPcYtanw6oEypn6VW"
+const xls20 = new XLS20(network, seed)
+
+await xls20.connect()
+
+console.log(await xls20.fundWallet())
+}
+
+main();
+
+console.log("Working xls20");
+export default XLS20;
 
   
