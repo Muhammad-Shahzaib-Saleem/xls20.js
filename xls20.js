@@ -486,6 +486,6 @@ class XLS20 {
   }
 }
 
-  module.default.exports = XLS20;
+module.exports = XLS20;
 
   
