@@ -5,8 +5,10 @@
   "main": "xls20.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node start /xls20.js "
+    "start": "node xls20.js ",
+    "main": "node main.js"
   },
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "https://github.com/dylanireland/xls20.js.git"

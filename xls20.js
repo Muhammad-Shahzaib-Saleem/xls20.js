@@ -1,16 +1,13 @@
 const xrpl = require("xrpl");
 
-const network = "Devnet"
-const seed = "sEdV82hVrg1hYKrPcYtanw6oEypn6VW"
-const xls20 = new XLS20(network, seed)
-await xls20.connect()
-console.log(await xls20.fundWallet())
+
 /**
  * The XLS20 Class is used to interact with XLS20 NFTs on the XRPL. To use XLS20.js, use `import XLS20 from 'xls20`.
  *
  * 
  * 
  */
+
 class XLS20 {
   /**
    * Constructs a new XLS20 object
@@ -489,4 +486,6 @@ class XLS20 {
   }
 }
 
-module.exports = XLS20;
+  module.default.exports = XLS20;
+
+  
