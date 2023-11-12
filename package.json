@@ -8,7 +8,7 @@
     "start": "node xls20.js ",
     "main": "node main.js"
   },
-  "type": "module",
+  
   "repository": {
     "type": "git",
     "url": "https://github.com/dylanireland/xls20.js.git"

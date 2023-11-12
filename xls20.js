@@ -1,13 +1,9 @@
-import { Wallet, Client, convertStringToHex } from "xrpl";
-
+const xrpl = require("xrpl");
 
 /**
  * The XLS20 Class is used to interact with XLS20 NFTs on the XRPL. To use XLS20.js, use `import XLS20 from 'xls20`.
- *
- * 
  * 
  */
-
 class XLS20 {
   /**
    * Constructs a new XLS20 object
@@ -18,18 +14,18 @@ class XLS20 {
    */
   constructor(network, walletSeed) {
     if (walletSeed) {
-      this.wallet = Wallet.fromSeed(walletSeed);
+      this.wallet = xrpl.Wallet.fromSeed(walletSeed);
     } else {
       this.generateWallet();
     }
     
     switch (network) {
-      case "Devnet": this.network = ["Devnet", "wss://s.altnet.rippletest.net:51233"]; break;
+      case "Devnet": this.network = ["Devnet", "wss://s.devnet.rippletest.net:51233"]; break;
       case "Mainnet": this.network = ["Mainnet", "wss://xrplcluster.com/"]; break;
       default: this.network = ["Custom", network]; break;
     }
 
-    this.client = new Client(this.network[1]);
+    this.client = new xrpl.Client(this.network[1]);
   }
 
   /**
@@ -46,9 +42,6 @@ class XLS20 {
    * // Use `xls20`...
    * ```
    */
-
-
-
   async connect() {
     try {
       await this.client.connect();
@@ -61,7 +54,7 @@ class XLS20 {
    * Generates a new wallet and sets it to the instance's `wallet`.
    */
   generateWallet() {
-    this.wallet = Wallet.generate();
+    this.wallet = xrpl.Wallet.generate();
   }
 
   /**
@@ -193,7 +186,7 @@ class XLS20 {
       "TransferFee": transferFee, // In 10ths of a basis-point. i.e. 5000 == 5%
       "NFTokenTaxon": taxon,
       "Flags": flags, //Burnable and transferable is 9
-      "URI": convertStringToHex(uri),
+      "URI": xrpl.uri,
     }
   
     return this.client.submitAndWait(jsontx, { wallet: this.wallet })
@@ -484,22 +477,6 @@ class XLS20 {
 
     return this.client.submitAndWait(jsontx, { wallet: this.wallet })
   }
-
 }
 
-async function main (){
-const network = "Devnet"
-const seed = "sEdV82hVrg1hYKrPcYtanw6oEypn6VW"
-const xls20 = new XLS20(network, seed)
-
-await xls20.connect()
-
-console.log(await xls20.fundWallet())
-}
-
-main();
-
-console.log("Working xls20");
-export default XLS20;
-
-  
+module.exports = XLS20;
